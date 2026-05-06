@@ -109,17 +109,13 @@ button {
 </div>
 
 <script>
-// Countdown to next 12 AM
-function getMidnight() {
-    const now = new Date();
-    const midnight = new Date();
-    midnight.setHours(24,0,0,0);
-    return midnight;
-}
+// 1-minute test countdown
+const testDuration = 60 * 1000; // 60 seconds
+const endTime = new Date().getTime() + testDuration;
 
 function updateCountdown() {
-    const now = new Date();
-    const diff = getMidnight() - now;
+    const now = new Date().getTime();
+    const diff = endTime - now;
 
     if (diff <= 0) {
         document.getElementById("countdown").style.display = "none";
@@ -128,12 +124,11 @@ function updateCountdown() {
         return;
     }
 
-    const h = Math.floor(diff / (1000 * 60 * 60));
-    const m = Math.floor((diff / (1000 * 60)) % 60);
     const s = Math.floor((diff / 1000) % 60);
+    const m = Math.floor((diff / (1000 * 60)) % 60);
 
     document.getElementById("countdown").innerText =
-        `${h}h ${m}m ${s}s left`;
+        `${m}m ${s}s left`;
 }
 
 setInterval(updateCountdown, 1000);
